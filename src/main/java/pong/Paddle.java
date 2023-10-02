@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class Paddle extends Rectangle{
     private int id;
     private int yVelocity;
-    private int speed;
+    private int speed = 10;
 
     public Paddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
         super(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -66,10 +66,10 @@ public class Paddle extends Rectangle{
 
     }
     public void setYDirection(int yDirection) {
-
+        yVelocity = yDirection;
     }
     public void move() {
-
+        y += yVelocity;
     }
     public void draw(Graphics g) {
         if (id == 1) {
@@ -77,7 +77,7 @@ public class Paddle extends Rectangle{
         } else {
             g.setColor(Color.red);
         }
-        g.fillRect(x, y, width, id);
+        g.fillRect(x, y, width, height);
     }
 
 }
