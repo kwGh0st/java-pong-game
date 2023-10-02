@@ -2,6 +2,7 @@ package main.java.pong;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -36,7 +37,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void newBall () {
 
     }
-    public void newPaddles() {}
+    public void newPaddles() {
+        paddle1 = new Paddle(0, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 1);
+        paddle2 = new Paddle(GAME_WIDTH - PADDLE_WIDTH, (GAME_HEIGHT / 2) - (PADDLE_HEIGHT / 2), PADDLE_WIDTH, PADDLE_HEIGHT, 2);
+    }
+
     public void paint(Graphics g) {
         image = createImage(getWidth(), getHeight());
         graphics = image.getGraphics();
@@ -44,7 +49,8 @@ public class GamePanel extends JPanel implements Runnable {
         g.drawImage(image, 0, 0, this);
     }
     public void draw(Graphics g) {
-
+        paddle1.draw(g);
+        paddle2.draw(g);
     }
 
     public void move() {}
@@ -70,22 +76,19 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
 
-    private class AL implements KeyListener {
+    private class AL extends KeyAdapter {
 
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
 
         @Override
         public void keyPressed(KeyEvent e) {
-
+            paddle1.keyPressed(e);
+            paddle2.keyPressed(e);
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-
+            paddle1.keyReleased(e);
+            paddle2.keyReleased(e);
         }
     }
 
